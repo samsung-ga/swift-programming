@@ -178,3 +178,35 @@ func printMathResult(_ mathFunction: CalculateTwoInts, _ a: Int, _ b: Int){ //�
 }
 printMathResult(addTwoInts, 3, 4)
 
+// MARK: - optional
+// 옵셔널의 정의: 값이 있을 수도, 없을 수도 있음. 선택적인 표현임
+
+var myName: String? = "yoonjin"
+print(myName) // Optional("yoonjin")
+myName = nil // nil은 위의 myName변수처럼 ?사용해서 옵셔널 선언된 곳에서만 사용될 수 있다.
+print(myName)
+
+
+// 옵셔널 강제 추출 *위험한 방식. 런타임 오류 일어날 가능성 가장 높음*
+// 엑코 자동으로 오류 수정할 때 ! 찍어주는 것 -> 옵셔널 강제 추출
+
+var name1: String? = "yoonjin"
+
+var yoonjin: String = name1! // 변수 yoonjin은 옵셔널이 아닌 변수이므로 옵셔널 변수인 name1을 추출하여 할당해준다.
+
+name1 = nil
+// yoonjin = name1! -> 런타임오류 발생
+
+// 옵셔널 바인딩. if 구문을 통해 nil값 먼저 체크 ~~
+// 옵셔널 바인딩을 통한 임시 상수(let) 할당
+var myName2: String? = "profitjean"
+if let name2 = myName2{
+    print("My name is \(name2)")
+}else {
+    print("myName2 == nil")
+}
+
+// 암시적 추출 옵셔널
+// ! 사용, 일반 값처럼 사용할 수 있으나, 여전히 옵셔널이기 때문에 nil값도 할당해줄 수 있다
+var myName3: String! = "yoonjinlee"
+print(myName3)
