@@ -120,3 +120,37 @@ func say(_ something: String) -> String {
 }
 say("hello")
 discadableResultSay("hello")
+
+// 옵셔널(Optional)
+// 옵셔널은 "선택적인" 즉 값이 '있을 수도, 없을 수도 있음'을 나타내는 표현입니다. 이는 '변수나 상수 등에 꼭 값이 있다는 것을 보장할 수 없다. 즉, 변수 또는 상수의 값이 nil일 수도 있다'는 것을 의미합니다.
+// 옵셔널은 열거형으로 정의되어 있다.
+var myName: String? = "jaeyong"
+print(myName)
+//myName = nil
+//print(myName)
+// 옵셔널 추출하기
+// 1. 강제 추출
+var jaeyong: String = myName!
+// 2. 옵셔널 바인딩
+if let name = myName {
+    print("My name is \(name)")
+} else {
+    print("myName == nil")
+}
+if var name = myName {
+    name = "wody"
+    print("My name is \(name)")
+} else {
+    print("myName == nil")
+}
+// 3. nil 병합 연산자
+// Optional ?? Value
+var nickname: String? = "wody"
+var name: String
+name = nickname ?? ""
+print(name)
+nickname = nil
+name = nickname ?? "it's nil"
+print(name)
+// 옵셔널 바인딩, nil 병합 연산자를 비롯해 뒤에서 배울 옵셔널 체이닝 등의 방법을 사용하는 편이 훨씬 안전합니다.
+
