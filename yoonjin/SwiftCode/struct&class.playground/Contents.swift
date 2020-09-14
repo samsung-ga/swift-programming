@@ -72,3 +72,86 @@ struct getSetCoordinatePoint{
 var maPosition: getSetCoordinatePoint = getSetCoordinatePoint(xp: 10, yp: 20)
 
 print(maPosition.oppositePoint)
+
+// MARK: - 프로퍼티 감시자
+
+// 프로퍼티 값이 새로 할당될 때마다 호출
+// willSet, didSet메서드
+
+class Account {
+    var credit: Int = 0 {
+        willSet{ // 프로퍼티가 변경될 값
+            print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정")
+        }
+        didSet{ // 프로퍼티가 변경되기 전의 값
+            print("잔액이 \(oldValue)원에서 \(credit)원으로 변경되었습니다")
+        }
+    }
+    
+}
+
+// MARK: - 인스턴스 메서드
+// 함수랑 형식 차이가 있는건 아닌데, 특정 타입 내부에 존재한다는 것이 큰 차이
+
+class LevelClass {
+    
+    var level: Int = 0 { // 현재 레벨 저장하는 저장 프로퍼티
+        didSet{
+            print("Level \(level)") // 프로퍼티 값 변경되면 호출하는 프로퍼티 감시자
+        }
+    }
+    func levelUp(){ // 레벨 올랐을 때 호출하는 메서드
+        print("Level Up!")
+        level += 1
+    }
+    
+    func levelDown(){ // 레벨 내려갈 때 호출하는 메서드
+        print("Level Down")
+        level -= 1
+        if level < 0 {
+            reset()
+        }
+    }
+    func jumpLevel(to: Int){ // 특정 레벨로 이동할 때 호출되는 메서드
+        print("Jump to \(to)")
+        level = to
+    }
+    func reset(){ // 레벨 초기화
+        print("Reset!")
+        level = 0
+    }
+}
+
+var levelClassInstance: LevelClass = LevelClass()
+levelClassInstance.levelUp()
+levelClassInstance.levelDown()
+levelClassInstance.levelDown()
+
+
+// MARK: - self 프로퍼티
+// 모든 인스턴스는 암시적으로 생성된 self 프로퍼티를 갖는다. 자바의 this와 비슷
+class LevelClassSelf {
+    var level: Int = 0 // 인스턴스 프로퍼티
+    
+    func jumpLevel( level: Int){
+        print("Jump to \(level)")
+        self.level = level // 매개변수 level과 인스턴스 프로퍼티 level 간 구별하기 위함
+        // self.level 이 인스턴스 프로퍼티임
+    }
+}
+
+// 값 타입 인스턴스 자체의 값 치환
+// 이게 뭔 개소리냐하면, 구조체나 열거형에서 self로 자기 자신을 치환할 수 있다는 말
+
+struct LevelStruct {
+    var level: Int = 0
+    
+    mutating func levelUp() {
+        print("Level Up!")
+        level = level + 1
+    }
+    mutating func reset() {
+        print("Reset!")
+        self = LevelStruct() // 이렇게 구조체 자기 자신이 self로 지환 가능하다,,,
+    }
+}
