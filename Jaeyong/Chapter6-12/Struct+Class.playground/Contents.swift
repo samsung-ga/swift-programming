@@ -227,3 +227,53 @@ public struct Bool {
 // 같은 소스파일 안에 구현한 다른 타입이나 기능에서도 사용할 수 없다?
 
 
+
+class PersonAA {
+    var name: String
+    static let identifier: String = "Person"
+    static func staticTypeMethod() {
+        
+    }
+    class func classTypeMethod() {
+        
+    }
+    init(name: String) {
+        self.name = name
+    }
+}
+let Jaeyong = PersonAA(name: "Jaeyong")
+
+
+struct Calculator {
+    var number: Int = 0
+    
+    mutating func plus(num: Int) {
+        number = number + num
+    }
+    mutating func reset() {
+        self = Calculator()
+    }
+}
+
+class SuperClass {
+    static let shared = SuperClass()
+    var name: String = ""
+    func hello() {
+        print(Self.shared)
+    }
+}
+class SubClass: SuperClass {}
+
+let x = SuperClass()
+//x.f()
+let y = SubClass()
+//y.f()
+
+var numbers = [1,2,3,4,5,6,7]
+numbers = numbers.filter { (value) -> Bool in
+    if value % 2 == 0 {
+        return true
+    }
+}
+
+print(numbers)
