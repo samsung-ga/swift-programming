@@ -155,3 +155,4 @@ struct LevelStruct {
         self = LevelStruct() // 이렇게 구조체 자기 자신이 self로 지환 가능하다,,,
     }
 }
+
