@@ -23,6 +23,32 @@ doubledNumbers = numbers.map({ (number: Int) -> Int in
 doubledNumbers = numbers.map({ return $0 * 2})
 print(doubledNumbers)
 
+// MARK: - 다양한 컨테이너 타입에서의 맵의 활용
+let alphabetDictionary: [String:String] = ["a":"A","b":"B"]
+
+var keys: [String] = alphabetDictionary.map { (tuple: (String, String)) -> // 키 값
+    String in
+    return tuple.0
+}
+
+keys = alphabetDictionary.map{$0.0}
+
+let values: [String] = alphabetDictionary.map{ $0.1 }
+print(keys)
+print(values)
+
+var numberSet: Set<Int> = [1,2,3,4,5]
+let resultSet = numberSet.map{ $0*2 }
+print(resultSet)
+
+
+let optionalInt: Int? = 3
+let resultInt: Int? = optionalInt.map{ $0*2 }
+print(resultInt)
+
+let range: CountableClosedRange = (0...3)
+let resultRange: [Int] = range.map{ $0 * 2}
+print(resultRange)
 // MARK: - filter
 // 맵과의 차이는, 특정 조건에 맞게 걸러내는 역할을 할 수 있다는 점
 // 리턴 타입도 bool, 조건에 맞으면 true, 아니면 false 반환
